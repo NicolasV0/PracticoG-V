@@ -1,20 +1,12 @@
 const { Router } = require('express');
-const { getEstrenos, getActores, getPeliculas, getPelicula, getOrigenNombre, getDirector } = require('../controllers/demo');
+const { getPersonajes, getPersonaje, getFiltrarPersonajes } = require('../controllers/demo');
 const rutas = Router();
 
-rutas.get('/peliculas', getPeliculas);
+rutas.get('/rickandmorty/personajes', getPersonajes);
 
-rutas.get('/pelicula/:id', getPelicula);
+rutas.get('/rickandmorty/personaje/:id', getPersonaje);
 
-rutas.get('/estrenos', getEstrenos);
-
-rutas.get('/actores', getActores);
-
-rutas.get('/nombre/:name', getOrigenNombre);
-
-rutas.get('/directores/:name', getDirector);
-
-
+rutas.get('/rickandmorty/nombre/:id/status/:id2', getFiltrarPersonajes);
 
 /*rutas.get('/peliculas', function(req,res){
     //res.send('demo')});

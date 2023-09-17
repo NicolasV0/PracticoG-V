@@ -2,53 +2,80 @@ const axios = require('axios');
 
 const { request, response } = require('express');
 
-
-const getPeliculas = (req = request ,res = response) => {
-    //const queryParam = req.query;
-    const {anio, ...resto} = req.query;
-    console.log(req.query);
-    console.log(resto);
-    res.status(200).json({name:`peliculas del año: ${anio}`});
-}
-
-const getPelicula = (req = request ,res = response) =>{
-    const {id} =  req.params;
-    res.status(200).json({name:`peliculas: ${id}`})};
-
-
-const getEstrenos = (req,res) => {res.json({name:'estrenos'})};
-
-const getActores = (req,res) => {res.json({name:'actores'})};
-
-const getOrigenNombre = (req = request ,res = response) => {
-    const {name} =  req.params;
-    console.log(name);
-    axios.get(`https://api.nationalize.io/?name=${name}`)
-    .then(({status,data,statusText}) => {
+const getPersonajes = (req = request ,res = response) => {
+    const {id} = req.params;
+    axios.get(`https://rickandmortyapi.com/api/character`)
+    .then(({status,data,results,statusText}) => {
+        console.log(status);
         res.status(200).json({
             status,
             data,
-            statusText,
-            name
+            results,
+            statusText
         });
+        
+        /*for(let cont = 0; cont<= 10; cont ++ ){
+            console.log('Producto: ');
+            console.log(data.meals[cont].idMeal);
+            console.log(data.meals[cont].strMeal);
+            console.log(data.meals[cont].strCategory);
+            console.log(data.meals[cont].strArea);
+            console.log('----------------------')
+        }*/
+        
     })
     .catch((error) =>{
         console.log(response);
         res.status(401).json({msg:'not found'});
     });
+   
 }
-    
-const getDirector = (req = request ,res = response) =>{
-    const {name} =  req.params;
-    res.status(200).json({name:`Director: ${name}`})};
+
+const getPersonaje = (req = request ,res = response) =>{
+    const {id} = req.params;
+    console.log(id);
+    axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+    .then(({status,data,statusText}) => {
+        res.status(200).json({
+            status,
+            data,
+            statusText
+            
+        });
+        
+    })
+    .catch((error) =>{
+        console.log(response);
+        res.status(401).json({msg:'not found'});
+    });
+};
+
+const getFiltrarPersonajes = (req = request ,res = response) =>{
+    const {id} = req.params;
+    console.log(id);
+    const {id2} = req.params;
+    axios.get(`https://rickandmortyapi.com/api/character/?${id}=rick&status=${id2}`)
+    .then(({status,data,statusText}) => {
+        res.status(200).json({
+            status,
+            data,
+            statusText
+            
+        });
+        
+    })
+    .catch((error) =>{
+        console.log(response);
+        res.status(401).json({msg:'not found'});
+    });
+};
+
+
 
 
 module.exports = {
-    getPeliculas,
-    getActores,
-    getEstrenos,
-    getPelicula,
-    getOrigenNombre,
-    getDirector
+    getPersonajes,
+    getPersonaje,
+    getFiltrarPersonajes
 
 };
