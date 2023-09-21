@@ -22,7 +22,7 @@ class Server{
       
         this.app.use('/api/v1', require('../routes/demo'));
         this.app.all('*', (req, res) => {
-            res.status(404).json({message:'404 Page Not Found'})
+            res.status(401).json({message:'401 Page Not Found'})
         })
 
     }

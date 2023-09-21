@@ -18,7 +18,7 @@ const getPersonajes = (req = request ,res = response) => {
         
     })
     .catch((error) =>{
-        res.status(401).json({msg:'not found'});
+        res.status(404).json({msg:'not found'});
         
     });
 }
@@ -36,15 +36,17 @@ const getPersonaje = (req = request ,res = response) =>{
        
     })
     .catch((error) =>{
-        res.status(401).json({msg:'not found'});
+        res.status(404).json({msg:'not found'});
         
     });
 };
 
 const getFiltrarPersonajes = (req = request ,res = response) =>{
-    const {id} = req.params;
-    const {id2} = req.params;
-    axios.get(`https://rickandmortyapi.com/api/character/?${id}=rick&status=${id2}`)
+
+    const {nombre} = req.query;
+    const {status} = req.query;
+    const {species} = req.query;
+    axios.get(`https://rickandmortyapi.com/api/character/?name=${nombre}&status=${status}&species=${species}`)
     .then(({status,data,statusText}) => {
         res.status(200).json({
             status,
@@ -55,7 +57,7 @@ const getFiltrarPersonajes = (req = request ,res = response) =>{
         
     })
     .catch((error) =>{
-        res.status(401).json({msg:'not found'});
+        res.status(404).json({msg:'not found'});
     });
 };
 
