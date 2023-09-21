@@ -56,9 +56,48 @@ const getCaracterID = (req = request, res = response) => {
         });        
 }
 
+//3. Listado de registros en formato json que pueda filtrarse a través de query params.
+const getFiltradoPorParametro = (req = request, res = response) => { 
+    
+    console.log(req.query);
+
+    axios.get(`https://rickandmortyapi.com/api/character/`)
+        .then(({ status, data, statusText }) => {
+            // handle success
+            
+
+            const query = req.query;
+            const key = Object.keys(query)[0];
+            
+            console.log(query[key]);
+            console.log(data.results.filter((i) => i[key].includes(query[key])));
+            
+
+            //Filtra dependiendo el query que pasemos, compara el atributo con el valor que hacemos el request
+            //Lo compara con todos los personajes y devuelve el match
+            res.status(200).json({
+                
+                status:200,
+                data: data.results.filter((i) => i[key].includes(query[key])),
+                msg: '200 ok'
+
+                })
+        })
+
+        .catch((error)=>{
+            // handle error
+            console.log(error);
+            res.status(400).json({
+                status:400,
+                msg: 'Error inesperado'
+            });
+        });        
+}
+
 
 
 module.exports = {
     getRegistrosJSON,
     getCaracterID,
+    getFiltradoPorParametro,
 };
