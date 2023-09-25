@@ -20,7 +20,7 @@ class Server{
 
     routers (){
       
-        this.app.use('/api/v1', require('../routes/demo'));
+        this.app.use('/api/v1/rickandmorty', require('../routes/personajes'));
         this.app.all('*', (req, res) => {
             res.status(401).json({message:'401 Page Not Found'})
         })
