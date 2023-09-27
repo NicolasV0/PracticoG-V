@@ -37,7 +37,6 @@ class Server {
     }
 
 
-
     listen(){
 
         this.app.listen(this.port, () =>{
