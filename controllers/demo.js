@@ -57,7 +57,7 @@ const getCaracterID = (req = request, res = response) => {
 }
 
 //3. Listado de registros en formato json que pueda filtrarse a través de query params.
-const getFiltradoPorParametro = (req = request, res = response) => { 
+const getFiltradoCaracter = (req = request, res = response) => { 
     
     console.log(req.query);
 
@@ -99,5 +99,5 @@ const getFiltradoPorParametro = (req = request, res = response) => {
 module.exports = {
     getRegistrosJSON,
     getCaracterID,
-    getFiltradoPorParametro,
+    getFiltradoCaracter,
 };
