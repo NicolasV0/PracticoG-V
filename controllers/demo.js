@@ -4,7 +4,6 @@ const { request, response} = require('express');
 //Listado de registros en formato json que muestre 50 o más registros.
 const getRegistrosJSON = (req = request, res = response) => {
 
-    console.log(req.params);
 
     axios.get(`https://rickandmortyapi.com/api/location/`)
         .then(({ status, data, statusText }) => {
@@ -31,7 +30,7 @@ const getRegistrosJSON = (req = request, res = response) => {
 //2. Visualización de un registro en particular (param id)
 const getCaracterID = (req = request, res = response) => {
 
-    console.log(req.params);
+    
     const { id } = req.params;
 
     axios.get(`https://rickandmortyapi.com/api/character/${id}`)
@@ -59,7 +58,7 @@ const getCaracterID = (req = request, res = response) => {
 //3. Listado de registros en formato json que pueda filtrarse a través de query params.
 const getFiltradoCaracter = (req = request, res = response) => { 
     
-    console.log(req.query);
+    
 
     axios.get(`https://rickandmortyapi.com/api/character/`)
         .then(({ status, data, statusText }) => {
