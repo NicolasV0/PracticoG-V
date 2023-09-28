@@ -28,7 +28,7 @@ class Server {
         });   
         this.app.use('/api/v1/rickandmorty', require('../routes/personajes'));
 
-        this.app.use('/api/v1/rickandmorty', require ('../routes/caracteres'));
+        this.app.use('/api/v1/caracteres', require ('../routes/caracteres'));
 
         this.app.all('*', (req, res) => {
             res.status(404).json({message:'404 Page Not Found'})
