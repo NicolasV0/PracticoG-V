@@ -26,7 +26,7 @@ class Server {
         this.app.get('/', function (req, res) {
             res.send('Hello World')
         });   
-        this.app.use('/api', require('../routes/personajes'));
+        this.app.use('/api/v1/rickandmorty', require('../routes/personajes'));
 
         this.app.use('/api', require ('../routes/caracteres'));
 
